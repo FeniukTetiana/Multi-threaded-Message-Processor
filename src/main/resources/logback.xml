@@ -1,0 +1,23 @@
+<configuration>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="dailyFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>10</maxHistory> <!-- Зберігати логи за останні 10 днів -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="dailyFileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </root>
+</configuration>
